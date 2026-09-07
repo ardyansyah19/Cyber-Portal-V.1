@@ -3,23 +3,6 @@
 Sistem login demo dengan berbagai lapisan keamanan (defense-in-depth).
 Ditujukan untuk pembelajaran/pengembangan lokal — sesuaikan lagi sebelum dipakai produksi.
 
-## Fitur Keamanan
-
-| Ancaman              | Mitigasi yang diterapkan |
-|----------------------|---------------------------|
-| SQL Injection        | PDO **prepared statements** di semua query, `PDO::ATTR_EMULATE_PREPARES => false` |
-| Password bocor       | `password_hash()` (Argon2id/bcrypt) + **pepper** tambahan via `hash_hmac` sebelum hashing |
-| Brute force          | Rate limiting per-IP + penguncian akun otomatis setelah `MAX_LOGIN_ATTEMPTS` gagal |
-| Timing attack        | `hash_equals()` untuk cek CSRF token, `password_verify()` dummy saat user tidak ditemukan |
-| User enumeration     | Pesan error login digeneralisasi ("username atau password salah") |
-| CSRF                 | Token acak per-session, wajib dicocokkan di setiap form POST |
-| Session hijacking    | Cookie `HttpOnly`, `Secure` (saat HTTPS), `SameSite=Strict`, regenerasi session ID berkala |
-| Session fixation     | `session_regenerate_id(true)` setiap kali login berhasil |
-| XSS                  | `htmlspecialchars()` di semua output, Content-Security-Policy header |
-| Clickjacking         | Header `X-Frame-Options: DENY` |
-| Idle session         | Auto logout setelah 30 menit tidak aktif |
-| Audit trail          | Tabel `activity_log` mencatat login/logout/registrasi |
-
 ## Cara Menjalankan
 
 1. **Buat database & tabel**

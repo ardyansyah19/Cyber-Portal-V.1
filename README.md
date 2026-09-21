@@ -48,12 +48,3 @@ secure-login/
 ├── logout.php        # hancurkan session dengan aman
 └── .htaccess         # blokir akses langsung ke file sensitif
 ```
-
-## Catatan Sebelum Produksi
-
-- Ganti `APP_PEPPER` dengan string acak panjang (≥32 karakter) dan simpan di secrets manager, bukan di repo.
-- Aktifkan HTTPS dan uncomment baris pemaksaan HTTPS di `.htaccess`.
-- Pertimbangkan menambahkan **2FA (TOTP)** — kolom `two_factor_secret` sudah disediakan di skema.
-- Pertimbangkan CAPTCHA (misal Cloudflare Turnstile) setelah beberapa kali gagal login.
-- Batasi hak akses user MySQL (`db_user`) hanya ke database ini, jangan pakai akun root.
-- Lakukan `password_needs_rehash()` check saat login untuk migrasi otomatis jika parameter hashing di-upgrade nanti.

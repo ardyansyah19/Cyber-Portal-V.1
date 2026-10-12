@@ -29,6 +29,13 @@ define('RATE_LIMIT_MAX_PER_IP', 20);   // batas percobaan login per-IP dalam win
 define('SESSION_LIFETIME', 30 * 60);   // auto-logout setelah 30 menit idle
 define('PEPPER', getenv('APP_PEPPER') ?: 'GANTI_INI_DENGAN_STRING_RAHASIA_PANJANG_DAN_ACAK');
 
+define('MAX_LOGIN_ATTEMPTS', 5);       // maksimal percobaan gagal
+define('LOCKOUT_DURATION_MIN', 15);    // menit akun dikunci setelah gagal berulang
+define('RATE_LIMIT_WINDOW_MIN', 10);   // jendela waktu untuk hitung percobaan per-IP
+define('RATE_LIMIT_MAX_PER_IP', 20);   // batas percobaan login per-IP dalam window
+define('SESSION_LIFETIME', 30 * 60);   // auto-logout setelah 30 menit idle
+define('PEPPER', getenv('APP_PEPPER') ?: 'GANTI_INI_DENGAN_STRING_RAHASIA_PANJANG_DAN_ACAK');
+
 // =====================================================
 // Hardened session settings — HARUS di-set sebelum session_start()
 // =====================================================
